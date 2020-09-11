@@ -7,14 +7,9 @@ app.set('view engine', 'ejs');
 app.set('Views', __dirname + '/views');
 
 app.use(express.static(__dirname + "/public"));
-
-app.get("/", (req, res) => {
-    res.render("index", {title: "Home"});
-});
-
-app.get("/servicios", (req, res)=>{
-    res.render("servicios", {title: "Servicios"});
-});
+// Routes api
+app.use('/', require('./routes/router'));
+app.use('/pets', require('./routes/pets'));
 
 app.use((req, res, next)=>{
     res.status(404).render("404", {title:"404"});

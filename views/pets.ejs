@@ -1,0 +1,26 @@
+<%- include("template/head", title) %>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(pets.length > 0) { %>
+                    <% pets.forEach(pet =>{ %>
+                        <tr>
+                            <td><%= pet.id %></td>
+                            <td><%= pet.name %></td>
+                            <td><%= pet.description %></td>
+                            <td></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <%- include("template/footer") %>
