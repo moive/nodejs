@@ -2,6 +2,17 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
+//conexion database
+const mongoose = require('mongoose');
+const user = 'pets_dev';
+const password = 'G6uItD3o2JPmx1fR';
+const database = 'veterenary';
+const uri = `mongodb+srv://${user}:${password}@cluster0.0kfw6.mongodb.net/${database}?retryWrites=true&w=majority`;
+
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(()=> console.log('Conected database'))
+    .catch(e => console.log(e));
+
 //motor de plantillas
 app.set('view engine', 'ejs');
 app.set('Views', __dirname + '/views');

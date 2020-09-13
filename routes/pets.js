@@ -1,14 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/',(req, res)=>{
-    res.render("pets", {
-        pets: [
-            {id:'ab001', name:'Leal', description:'Leal description'},
-            {id:'ab002', name:'Boby', description:'Boby description'},
-        ],
-        title:'Pets'
-    });
+const Pet = require('../models/pet');
+
+router.get('/',async (req, res)=>{
+    try {
+        const pets = await Pet.find();
+        
+        res.render("pets", {
+            pets,
+            title:'Pets'
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
 });
 
 module.exports = router;
