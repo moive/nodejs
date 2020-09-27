@@ -1,0 +1,9 @@
+<%- include("template/head", title) %>
+    <div class="container">
+        <h1>Create a new pet</h1>
+        <form action="/pets" method="POST">
+            <input type="text" class="form-control my-2" placeholder="Add name" name="name">
+            <input type="text" class="form-control my-2" placeholder="Add description" name="description">
+            <button class="btn btn-success btn-block" type="submit">Add</button>
+        </form>
+    </div>
