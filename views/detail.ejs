@@ -1,0 +1,29 @@
+<%- include("template/head", title) %>
+    <div class="container">
+        <h1>Detail pet</h1>
+        <% if (error) { %>
+            <p><%= message %></p>
+            <a href="/pets" class="btn btn-dark">Return to pets</a>
+        <% } %>
+
+        <% if(!error) {%>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= pet.id %></td>
+                        <td><%= pet.name %></td>
+                        <td><%= pet.description %></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        <% } %>
+    </div>

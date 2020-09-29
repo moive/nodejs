@@ -37,4 +37,27 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res)=>{
+    const id = req.params.id;
+
+    try {
+        const PetDB = await Pet.findOne({_id: id});
+        console.log(PetDB);
+
+        res.render('detail', {
+            pet:PetDB,
+            error: false,
+            title:'Detail pet'
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.render('detail', {
+            error: true,
+            message:'The selected id cannot be found',
+            title:'Detail pet'
+        });
+    }
+})
+
 module.exports = router;

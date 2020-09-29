@@ -18,7 +18,9 @@
                             <td><%= pet.id %></td>
                             <td><%= pet.name %></td>
                             <td><%= pet.description %></td>
-                            <td></td>
+                            <td>
+                                <a href="pets/<%= pet.id %>" class="btn btn-warning btn-sm">Edit</a>
+                            </td>
                         </tr>
                     <% }) %>
                 <% } %>
