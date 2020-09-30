@@ -60,4 +60,25 @@ router.get('/:id', async (req, res)=>{
     }
 })
 
+router.delete('/:id', async (req, res)=>{
+    const id = req.params.id;
+
+    try {
+        const petDB = await Pet.findByIdAndDelete({_id: id});
+
+        if(petDB){
+            res.json({
+                status: true,
+                message: 'Eliminated!'
+            });
+        }
+
+    } catch (error) {
+        res.json({
+            status: false,
+            message: 'Failure to remove!'
+        });
+    }
+})
+
 module.exports = router;
