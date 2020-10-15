@@ -81,4 +81,26 @@ router.delete('/:id', async (req, res)=>{
     }
 })
 
+router.put('/:id', async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+
+    try {
+        const petDB = await Pet.findByIdAndUpdate(id, body, {
+            useFindAndModify: false,
+        });
+
+        res.json({
+            status: true,
+            message: "Edited"
+        });
+    } catch (error) {
+        console.log(error);
+        res.json({
+            status: false,
+            message: "Failed",
+        });
+    }
+})
+
 module.exports = router;
