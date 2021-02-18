@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const chalk = require("chalk");
+let {setViewEngine} = require("../config/config");
 
 router.get("/", (req, res) => {
-    res.render("index", {title: "Home"});
+    // console.log(chalk.red(config.setViewEngine()));
+    res.render(`${setViewEngine()}/index`, {title: "Home"});
 });
 
-router.get("/services", (req, res)=>{
-    res.render("services", {title: "Services"});
+router.get("/services", (req, res) => {
+    res.render(`${setViewEngine()}/services`, {title: "Services"});
 });
 
 module.exports = router;
