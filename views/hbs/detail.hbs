@@ -1,0 +1,71 @@
+{{> head }}
+<div class="container">
+    <h1>Detail pet</h1>
+    {{#if error}}
+    <p>
+        {{message}}
+    </p>
+    <a href="/pets" class="btn btn-dark">Return to pets</a>
+
+    {{else}}
+    <form id="editForm" data-id="{{pet.id}}">
+        <input type="text" class="form-control my-2" name="name" value="{{ pet.name }}" />
+        <input type="text" class="form-control my-2" name="description" value="{{ pet.description }}" />
+        <button class="btn btn-warning" type="submit">Edit</button>
+    </form>
+
+    <button class="btn btn-danger btn-sm mt-5" id="btnDelete" data-id="{{ pet.id }}">Delete</button>
+
+    {{/if}}
+</div>
+
+<script>
+    const btnDelete = document.querySelector("#btnDelete");
+    !!btnDelete && btnDelete.addEventListener("click", async () => {
+        const id = btnDelete.dataset.id;
+        // console.log(id);
+        try {
+            const data = await fetch(`/pets/${id}`, {
+                method: 'delete'
+            });
+            const res = await data.json();
+            // console.log(res);
+
+            if (res.status) location.href = "/pets"
+            else console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
+    const editForm = document.querySelector("#editForm");
+    !!editForm && editForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = editForm.elements['name'].value;
+        const description = editForm.elements['description'].value;
+        const id = editForm.dataset.id;
+
+        try {
+            const data = await fetch(`/pets/${id}`, {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, description })
+            });
+
+            const res = await data.json();
+
+            if (res.status) {
+                location.href = "/pets"
+            } else {
+                console.log(res);
+            }
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    });
+</script>

@@ -1,0 +1,30 @@
+{{> head }}
+<div class="container">
+    <h1>CRUD Mongo</h1>
+    <a href="/pets/create" class="btn btn-success my-4">Create new pet</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#if pets.length }}
+            {{#each pets }}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td>
+                    <a href="pets/{{this.id}}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+            {{/each}}
+            {{/if}}
+        </tbody>
+    </table>
+</div>
+{{> footer }}

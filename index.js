@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const hbs = require("hbs");
 const chalk = require("chalk");
 let {setViewEngine} = require("./config/config");
 
@@ -25,7 +26,8 @@ mongoose
     .catch((e) => console.log(e));
 
 //motor de plantillas
-app.set("view engine", "ejs");
+hbs.registerPartials(__dirname + "/views/hbs/partials", function (err) {});
+app.set("view engine", "hbs");
 app.set("Views", __dirname + "/views");
 
 app.use(express.static(__dirname + "/public"));
@@ -34,7 +36,7 @@ app.use("/", require("./routes/router"));
 app.use("/pets", require("./routes/pets"));
 
 app.use((req, res, next) => {
-    res.status(404).render(`${setViewEngine()}/404`, {title: "404"});
+    res.status(404).render(`${setViewEngine("hbs")}/404`, {title: "404"});
 });
 
 app.listen(port, () => {

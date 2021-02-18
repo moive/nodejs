@@ -3,13 +3,14 @@ const router = express.Router();
 
 const Pet = require("../models/pet");
 const chalk = require("chalk");
-let {setViewEngine} = require("../config/config");
+let config = require("../config/config");
 
+let setViewEngine = config.setViewEngine("hbs");
 router.get("/", async (req, res) => {
     try {
         const pets = await Pet.find();
 
-        res.render(`${setViewEngine()}/pets`, {
+        res.render(`${setViewEngine}/pets`, {
             pets,
             title: "Pets",
         });
@@ -19,7 +20,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/create", (req, res) => {
-    res.render(`${setViewEngine()}/create`, {
+    res.render(`${setViewEngine}/create`, {
         title: "Create a Pet",
     });
 });
@@ -45,14 +46,14 @@ router.get("/:id", async (req, res) => {
         const PetDB = await Pet.findOne({_id: id});
         console.log(PetDB);
 
-        res.render(`${setViewEngine()}/detail`, {
+        res.render(`${setViewEngine}/detail`, {
             pet: PetDB,
             error: false,
             title: "Detail pet",
         });
     } catch (error) {
         console.log(error);
-        res.render(`${setViewEngine()}/detail`, {
+        res.render(`${setViewEngine}/detail`, {
             error: true,
             message: "The selected id cannot be found",
             title: "Detail pet",
